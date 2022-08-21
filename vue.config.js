@@ -36,7 +36,32 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+    //配置代理，区分测试和生产
+    proxy: {
+      //灵活代理；请求前缀为/api时，走下面的代理
+      '/dev-api': {
+        //代理服务器把请求转发给url(真正的后台服务器)
+        target: 'http://localhost:8081',
+        // 是否启用websockets
+        ws: true,
+        //是否开启代理
+        changeOrigin: true,
+        //路径重写
+        pathRewrite: {
+          //匹配以api开头的路径替换成空字符串
+          '^/dev-api': ''
+        }
+      },
+      //配置多个代理；请求前缀为/demo时，走下面的代理
+      '/prod-api': {
+        target: 'url2',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/prod-api': ''
+        }
+      }
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
