@@ -160,6 +160,27 @@ export const constantRoutes = [
     ]
   },
 
+  {
+    path: '/statistics',
+    component: Layout,
+    redirect: '/statistics/codeCommit',
+    name: 'Statistics',
+    meta: { title: '统计', icon: 'table' },
+    children: [
+      {
+      path: 'codeCommit',
+      name: 'CodeCommit',
+      component: () => import('@/views/statistics/codeCommit/index'),
+      meta: { title: 'commit统计', icon: 'dashboard' }
+    },
+      {
+        path: 'visit',
+        name: 'Visit',
+        component: () => import('@/views/statistics/visit/index'),
+        meta: { title: '访问量统计', icon: 'dashboard' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

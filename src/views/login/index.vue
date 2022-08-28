@@ -1,9 +1,10 @@
 <template>
   <div class="login-container">
+    <el-col :span="12" :offset="12">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">Login</h3>
       </div>
 
       <el-form-item prop="username">
@@ -43,12 +44,13 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
-      <div class="tips">
+<!--      <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: any</span>
-      </div>
+      </div>-->
 
     </el-form>
+    </el-col>
   </div>
 </template>
 
@@ -75,7 +77,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '111111'
+        password: '123456'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -180,11 +182,15 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  background-color: #926335;
+  background-image: url("~@/assets/images/bg06.png");
+  background-size: 50% 100%;
+  background-position: left;
+  background-repeat: no-repeat;
   overflow: hidden;
 
   .login-form {
-    position: relative;
+    //position: relative;
     width: 520px;
     max-width: 100%;
     padding: 160px 35px 0;
