@@ -10,7 +10,7 @@
 import echarts from "echarts";
 
 export default {
-  name: "chartLine",
+  name: "ChartLine",
   data() {
     return {
       day: 12,
@@ -45,6 +45,7 @@ export default {
     },
     drawLineChart() {
       this.chartLine = echarts.init(this.$refs.chartLine)
+      this.chartLine.clear()
       this.chartLine.setOption({
         title: {
           text: this.projectName+this.lineChart.title
@@ -76,6 +77,7 @@ export default {
       })
     },
     generalSeries(){
+      this.lineChart.series=[]
       let seriesTemp= []
       for (let i = 0; i < this.lineChart.seriesObj.length; i++) {
         let seriesItem=  {
@@ -92,10 +94,25 @@ export default {
   computed:{
 
   },
+  watch:{
+    lineChart:{
+      deep:true,
+      handler(newValue,oldValue){
+        console.log('lineChart改变了',newValue,oldValue)
+      }
+    }
+  },
   mounted() {
     this.getStatistics()
-
-  }
+    this.$bus.$on('reSearch',(data)=>{
+      console.log('chartLine，收到了数据',data)
+      this.projectName=data
+      this.getStatistics()
+    })
+  },
+  beforeDestroy() {
+    this.$bus.$off('reSearch')
+  },
 
 }
 </script>

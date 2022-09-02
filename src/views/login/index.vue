@@ -182,7 +182,7 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: #926335;
+  background-color: black;
   background-image: url("~@/assets/images/bg06.png");
   background-size: 50% 100%;
   background-position: left;

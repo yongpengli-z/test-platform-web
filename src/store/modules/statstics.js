@@ -22,7 +22,6 @@ const mutations={
     }
     state.lineChart.legendData = yAxisName
     state.lineChart.seriesObj = result.data.yaxisValue
-    console.log('state',state)
   }
 }
 const state={
@@ -35,9 +34,26 @@ const state={
     series: []
   }
 }
+
+const getter={
+  provideSeries(state){
+    let seriesTemp= []
+    for (let i = 0; i < state.lineChart.seriesObj.length; i++) {
+      let seriesItem=  {
+        name: state.lineChart.seriesObj[i].itemName,
+        type: 'line',
+        stack: '总量',
+        data: state.lineChart.seriesObj[i].itemValue
+      }
+      seriesTemp.push(seriesItem)
+    }
+    return seriesTemp
+  }
+}
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
+  actions,
+  getter
 }
