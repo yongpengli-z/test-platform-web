@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import PanelGroup from "@/views/statistics/codeCommit/components/PanelGroup";
-import chartLine from '@/views/statistics/codeCommit/components/chartLine'
+import PanelGroup from '@/views/statistics/codeCommit/components/PanelGroup'
+import ChartLine from '@/views/statistics/codeCommit/components/ChartLine'
 export default {
-  components: { chartLine,PanelGroup }
+  components: { ChartLine, PanelGroup }
 }
 </script>
 
