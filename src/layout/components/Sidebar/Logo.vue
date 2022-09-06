@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      title: 'Vue Admin Template',
+      title: 'ZILLIZ Test Platform',
       logo: require('@/assets/images/zillizlog.png')
     }
   }

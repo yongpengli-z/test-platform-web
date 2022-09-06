@@ -8,13 +8,6 @@ export function login(data) {
   })
 }
 
-export function feiShuLogin(data) {
-  return request({
-    url: '/user/feishulogin',
-    method: 'post',
-    data
-  })
-}
 
 export function getInfo(token) {
   return request({

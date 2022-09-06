@@ -2,7 +2,7 @@
   <el-row :gutter="40" class="panel-group">
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('towhee')">
-        <div class="card-panel-icon-wrapper icon-people">
+        <div class="card-panel-icon-wrapper icon-towhee">
           <el-image style="width: 60px; height: 60px"  :src="require('@/assets/images/towhee.png')"></el-image>
         </div>
         <div class="card-panel-description">
@@ -94,7 +94,7 @@ export default {
         color: #fff;
       }
 
-      .icon-people {
+      .icon-towhee {
         background: #40c9c6;
       }
 
@@ -111,7 +111,7 @@ export default {
       }
     }
 
-    .icon-people {
+    .icon-towhee {
       color: #40c9c6;
     }
 
