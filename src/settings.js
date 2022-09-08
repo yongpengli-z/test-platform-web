@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'Zilliz Test Platform',
 
   /**
    * @type {boolean} true | false

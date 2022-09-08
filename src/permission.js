@@ -88,24 +88,3 @@ router.afterEach(() => {
   // finish progress bar
   NProgress.done()
 })
-
-/*export function parseUrl() {
-  let getUrl = window.location.href
-  let getKVInfo = getUrl.split('?')[1]
-  let getKVs = getKVInfo.split('&')
-  let obj = {}  //创建空对象，接收截取的参数
-  for (let i = 0; i < getKVs.length; i++) {
-    console.log(i)
-    let item = getKVs[i].split('=')
-    let key = item[0]
-    let value = item[1]
-    obj[key] = value
-  }
-  console.log(obj)
-  store.commit('user/SET_TOKEN', obj['Token'])
-  store.commit('user/SET_AVATAR', obj['avatar'])
-  store.commit('user/SET_NAME', obj['username'])
-  // setToken(obj["Token"])
-  //console.log("getUrl",getUrl)
-
-}*/

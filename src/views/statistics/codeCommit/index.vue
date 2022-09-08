@@ -1,6 +1,7 @@
 <template>
   <div class="chart-container">
     <panel-group />
+    <DatePicker/>
     <chart-line />
   </div>
 </template>
@@ -8,8 +9,9 @@
 <script>
 import PanelGroup from '@/views/statistics/codeCommit/components/PanelGroup'
 import ChartLine from '@/views/statistics/codeCommit/components/ChartLine'
+import DatePicker from "@/components/DateTime/DatePicker";
 export default {
-  components: { ChartLine, PanelGroup }
+  components: {DatePicker, ChartLine, PanelGroup }
 }
 </script>
 

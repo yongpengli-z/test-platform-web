@@ -16,7 +16,7 @@ export default {
       day: 12,
       projectName: "towhee",
       lineChart: {
-        title: "代码提交统计",
+        title: " commit statistics",
         xAxisName: [],
         legendData: [],
         seriesValues: 0,
@@ -51,7 +51,29 @@ export default {
           text: this.projectName+this.lineChart.title
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'line'
+          },
+          formatter: function (params) {
+            var html = '';
+            if (params.length !== 0) {
+              // 对应x轴的时间数据  也就是2019-01-01
+              // 可以自己打印一下console.info(params[0]);
+              var getName = params[0].name;
+              html += getName + '<br/>';
+              for (var i = 0; i < params.length; i++) {
+                // 如果为0 为空的数据我们不要了(你们可以直接判断 > 0)
+                if (params[i].value != null && params[i].value !== 0
+                  && params[i].value !== '') {
+                  // params[i].marker 需要加上，否则你鼠标悬浮时没有样式了
+                  html += params[i].marker;
+                  html += params[i].seriesName + ': ' + params[i].value + '<br/>';
+                }
+              }
+            }
+            return html;
+          }
         },
         legend: {
           data: this.lineChart.legendData,
@@ -61,7 +83,8 @@ export default {
         grid: {
           left: '3%',
           right: '4%',
-          bottom: '3%',
+          bottom: '5%',
+          top: '15%',
           containLabel: true
         },
         xAxis: {
@@ -70,9 +93,30 @@ export default {
           data: this.lineChart.xAxisName
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          minInterval: 1 // 只显示整数
         },
-        series: this.lineChart.series
+        series: this.lineChart.series,
+        toolbox: { //可视化的工具箱
+          show: true,     //true显示，false隐藏
+          feature: {
+            dataView: { //数据视图
+              show: true
+            },
+            restore: { //重置
+              show: true
+            },
+            dataZoom: { //数据缩放视图
+              show: true
+            },
+            saveAsImage: {//保存图片
+              show: true
+            },
+            magicType: {//动态类型切换
+              type: ['bar', 'line']
+            }
+          }
+        },
 
       })
     },
@@ -83,7 +127,6 @@ export default {
         let seriesItem=  {
           name: this.lineChart.seriesObj[i].itemName,
           type: 'line',
-          stack: '总量',
           data: this.lineChart.seriesObj[i].itemValue
         }
         seriesTemp.push(seriesItem)
@@ -121,6 +164,6 @@ export default {
 
 .charLineSize {
   width: 100%;
-  height: 480px;
+  height: 550px;
 }
 </style>

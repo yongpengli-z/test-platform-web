@@ -9,46 +9,46 @@
           <div class="card-panel-text">
             Towhee
           </div>
-          <count-to :start-val="0" :end-val="100" :duration="2500" class="card-panel-num" />
+          <count-to :start-val="0" :end-val=totalNum.towhee :duration="2500" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('milvus')">
         <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-class="message" class-name="card-panel-icon" />
+          <el-image style="width: 60px; height: 60px"  :src="require('@/assets/images/milvus.png')"></el-image>
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
             Milvus
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('vdc')">
-        <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="money" class-name="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            VDC
-          </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+          <count-to :start-val="0" :end-val=totalNum.milvus :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('knowhere')">
-        <div class="card-panel-icon-wrapper icon-shopping">
-          <svg-icon icon-class="shopping" class-name="card-panel-icon" />
+        <div class="card-panel-icon-wrapper icon-money">
+          <el-image style="width: 60px; height: 60px"  :src="require('@/assets/images/knowhere.png')"></el-image>
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
             knowhere
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val=totalNum.knowhere :duration="3200" class="card-panel-num" />
+        </div>
+      </div>
+    </el-col>
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel" @click="handleSetLineChartData('zilliz')">
+        <div class="card-panel-icon-wrapper icon-shopping">
+          <el-image style="width: 60px; height: 60px"  :src="require('@/assets/images/zilliz.png')"></el-image>
+        </div>
+        <div class="card-panel-description">
+          <div class="card-panel-text">
+            zilliz
+          </div>
+          <count-to :start-val="0" :end-val=totalNum.zilliz :duration="3600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -59,6 +59,16 @@
 import CountTo from 'vue-count-to'
 
 export default {
+  data(){
+    return{
+      totalNum:{
+        towhee:100,
+        milvus:100,
+        knowhere:99,
+        zilliz:0
+      }
+    }
+  },
   components: {
     CountTo
   },
