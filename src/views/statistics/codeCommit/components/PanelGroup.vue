@@ -74,7 +74,9 @@ export default {
   },
   methods: {
     handleSetLineChartData(type) {
-      this.$bus.$emit('reSearch', type)
+    /*  this.$bus.$emit('reSearch', type)*/
+      this.$store.commit("statistics/SetProjectName",type)
+      this.$store.dispatch("statistics/getStatistics")
     }
   }
 }

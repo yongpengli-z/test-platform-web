@@ -13,42 +13,23 @@ export default {
   name: "ChartLine",
   data() {
     return {
-      day: 12,
-      projectName: "towhee",
-      lineChart: {
+      /*lineChart: {
         title: " commit statistics",
         xAxisName: [],
         legendData: [],
-        seriesValues: 0,
         seriesObj: [],
         series: []
-      }
+      }*/
+
     }
   },
   methods: {
-    async getStatistics(){
-      let result = await this.$API.statistics.queryStatisticsByProject(this.day,this.projectName)
-      console.log('@@@', result)
-      console.log('@@@data',  result.data.yaxisValue)
-      this.lineChart.xAxisName = result.data.xaxisName
-      let yAxisName=[]
-      let yAxisValue=[]
-      for (let i = 0; i < result.data.yaxisValue.length; i++) {
-        yAxisName.push(result.data.yaxisValue[i].itemName)
-        yAxisValue.push(result.data.yaxisValue[i].itemValue)
-      }
-      this.lineChart.legendData = yAxisName
-      this.lineChart.seriesObj = result.data.yaxisValue
-      this.generalSeries()
-      console.log('yAxisValue',yAxisValue)
-      this.drawLineChart()
-    },
     drawLineChart() {
       this.chartLine = echarts.init(this.$refs.chartLine)
       this.chartLine.clear()
       this.chartLine.setOption({
         title: {
-          text: this.projectName+this.lineChart.title
+          text: this.$store.state.statistics.projectName+this.$store.state.statistics.lineChart.title
         },
         tooltip: {
           trigger: 'axis',
@@ -76,7 +57,7 @@ export default {
           }
         },
         legend: {
-          data: this.lineChart.legendData,
+          data: this.$store.state.statistics.lineChart.legendData,
           top: '6%'
 
         },
@@ -90,13 +71,13 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: this.lineChart.xAxisName
+          data: this.$store.state.statistics.lineChart.xAxisName
         },
         yAxis: {
           type: 'value',
           minInterval: 1 // 只显示整数
         },
-        series: this.lineChart.series,
+        series: this.$store.state.statistics.lineChart.series,
         toolbox: { //可视化的工具箱
           show: true,     //true显示，false隐藏
           feature: {
@@ -119,42 +100,35 @@ export default {
         },
 
       })
-    },
-    generalSeries(){
-      this.lineChart.series=[]
-      let seriesTemp= []
-      for (let i = 0; i < this.lineChart.seriesObj.length; i++) {
-        let seriesItem=  {
-          name: this.lineChart.seriesObj[i].itemName,
-          type: 'line',
-          data: this.lineChart.seriesObj[i].itemValue
-        }
-        seriesTemp.push(seriesItem)
-      }
-      this.lineChart.series=seriesTemp
     }
   },
   computed:{
-
+    lineChart(){
+      return this.$store.state.statistics.lineChart
+}
   },
   watch:{
     lineChart:{
       deep:true,
       handler(newValue,oldValue){
         console.log('lineChart改变了',newValue,oldValue)
+        this.drawLineChart()
       }
     }
   },
   mounted() {
-    this.getStatistics()
-    this.$bus.$on('reSearch',(data)=>{
+    this.$store.dispatch("statistics/getStatistics")
+    //this.getStatistics()
+    //使用全局事件总线
+   /* this.$bus.$on('reSearch',(data)=>{
       console.log('chartLine，收到了数据',data)
       this.projectName=data
       this.getStatistics()
-    })
+    })*/
+    this.drawLineChart()
   },
   beforeDestroy() {
-    this.$bus.$off('reSearch')
+    /*this.$bus.$off('reSearch')*/
   },
 
 }

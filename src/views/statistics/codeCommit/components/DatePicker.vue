@@ -11,7 +11,7 @@
       end-placeholder="EndDate"
       :picker-options="pickerOptions">
     </el-date-picker>
-    <el-button type="primary" plain @click="reSearch">Search</el-button>
+    <el-button type="primary" plain @click="searchByRange">Search</el-button>
 
   </div>
 </template>
@@ -48,27 +48,19 @@ export default {
           }
         }]
       },
-      dateValue: []
+      dateValue: [new Date(new Date().setDate(new Date().getDate()-20)),new Date()]
     };
   },
   methods:{
-    reSearch(){
-      console.log("dataValue",this.dateValue.slice(0,1))
-      const startDate=this.parseStrToDate(this.dateValue.slice(0,1))
-      console.log("startDate",startDate)
-
-    },
-    parseStrToDate(dateStr){
-      const myDate=new Date(dateStr)
-      const getFullYear = myDate.getFullYear();
-      const getMonth = myDate.getMonth()+1> 9? myDate.getMonth()+1:'0'+(myDate.getMonth()+1);
-      const getDay = myDate.getDate() > 9? myDate.getDate():'0'+(myDate.getDate());
-      const getHours = myDate.getHours() > 9? myDate.getHours():'0'+(myDate.getHours());
-      const getMinutes = myDate.getMinutes() > 9? myDate.getMinutes():'0'+(myDate.getMinutes());
-      const getSeconds = myDate.getSeconds() > 9? myDate.getSeconds():'0'+(myDate.getSeconds());
-      const t = getFullYear+'-'+getMonth+'-'+getDay+' '+getHours+':'+getMinutes+':'+getSeconds;
-      return t;
+    searchByRange(){
+      this.$store.dispatch("statistics/setDateRange",this.dateValue)
+      this.$store.dispatch("statistics/getStatistics")
     }
+
+  },
+  mounted() {
+    console.log("dateValue",this.dateValue)
+    this.$store.dispatch("statistics/setDateRange",this.dateValue)
   }
 }
 </script>

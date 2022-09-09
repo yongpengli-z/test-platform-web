@@ -8,9 +8,9 @@ import request from "@/utils/request";
   })
 }*/
 
-export const queryStatisticsByProject=(day,projectName)=>request({
+export const queryStatisticsByProject=(startTime,endTime,projectName)=>request({
     url:'/statistics/commit/projectList',
     method:'get',
-    params:{day,projectName}
+    params:{startTime,endTime,projectName}
   }
 )

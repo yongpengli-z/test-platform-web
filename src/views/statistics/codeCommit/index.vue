@@ -9,7 +9,7 @@
 <script>
 import PanelGroup from '@/views/statistics/codeCommit/components/PanelGroup'
 import ChartLine from '@/views/statistics/codeCommit/components/ChartLine'
-import DatePicker from "@/components/DateTime/DatePicker";
+import DatePicker from "@/views/statistics/codeCommit/components/DatePicker";
 export default {
   components: {DatePicker, ChartLine, PanelGroup }
 }
