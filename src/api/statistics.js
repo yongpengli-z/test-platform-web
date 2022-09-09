@@ -14,3 +14,9 @@ export const queryStatisticsByProject=(startTime,endTime,projectName)=>request({
     params:{startTime,endTime,projectName}
   }
 )
+
+export const queryTotalNumByProject=(startTime,endTime)=>request({
+  url:'/statistics/commit/totalNum',
+  method:'get',
+  params:{startTime,endTime}
+})

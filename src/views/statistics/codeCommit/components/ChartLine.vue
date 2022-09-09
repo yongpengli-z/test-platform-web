@@ -13,14 +13,6 @@ export default {
   name: "ChartLine",
   data() {
     return {
-      /*lineChart: {
-        title: " commit statistics",
-        xAxisName: [],
-        legendData: [],
-        seriesObj: [],
-        series: []
-      }*/
-
     }
   },
   methods: {
@@ -29,7 +21,7 @@ export default {
       this.chartLine.clear()
       this.chartLine.setOption({
         title: {
-          text: this.$store.state.statistics.projectName+this.$store.state.statistics.lineChart.title
+          text: this.$store.state.statistics.projectName+this.lineChart.title
         },
         tooltip: {
           trigger: 'axis',
@@ -57,7 +49,7 @@ export default {
           }
         },
         legend: {
-          data: this.$store.state.statistics.lineChart.legendData,
+          data: this.lineChart.legendData,
           top: '6%'
 
         },
@@ -71,13 +63,13 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: this.$store.state.statistics.lineChart.xAxisName
+          data: this.lineChart.xAxisName
         },
         yAxis: {
           type: 'value',
           minInterval: 1 // 只显示整数
         },
-        series: this.$store.state.statistics.lineChart.series,
+        series: this.lineChart.series,
         toolbox: { //可视化的工具箱
           show: true,     //true显示，false隐藏
           feature: {

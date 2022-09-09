@@ -1,5 +1,5 @@
 <template>
-  <div class="block">
+  <div class="block" >
 <!--    <span class="demonstration">select date:</span>-->
     <el-date-picker
       v-model="dateValue"
@@ -11,7 +11,7 @@
       end-placeholder="EndDate"
       :picker-options="pickerOptions">
     </el-date-picker>
-    <el-button type="primary" plain @click="searchByRange">Search</el-button>
+    <el-button type="primary" plain @click="searchByRange" style="margin: 10px">Search</el-button>
 
   </div>
 </template>
@@ -48,18 +48,18 @@ export default {
           }
         }]
       },
-      dateValue: [new Date(new Date().setDate(new Date().getDate()-20)),new Date()]
+      dateValue: [new Date(new Date().setDate(new Date().getDate()-10)),new Date()]
     };
   },
   methods:{
     searchByRange(){
       this.$store.dispatch("statistics/setDateRange",this.dateValue)
       this.$store.dispatch("statistics/getStatistics")
+      this.$store.dispatch("statistics/getTotalNum")
     }
 
   },
-  mounted() {
-    console.log("dateValue",this.dateValue)
+  created() {
     this.$store.dispatch("statistics/setDateRange",this.dateValue)
   }
 }

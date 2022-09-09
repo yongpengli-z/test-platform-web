@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import {queryStatisticsByProject} from '@/api/statistics'
+import {queryStatisticsByProject, queryTotalNumByProject} from '@/api/statistics'
 
 
 const actions = {
@@ -9,13 +9,16 @@ const actions = {
   },
   setDateRange(context, value) {
     context.commit("SetDateRange", value)
+  },
+  getTotalNum(context){
+    context.commit("GetTotalNum")
   }
+
 }
 const mutations = {
   async GetStatistics(state) {
     console.log("begin")
     let result = await queryStatisticsByProject(state.startTime,state.endTime, state.projectName)
-    console.log('@@@', result)
     state.lineChart.xAxisName = result.data.xaxisName
     let yAxisName = []
     let yAxisValue = []
@@ -47,6 +50,14 @@ const mutations = {
   },
   SetProjectName(state,value){
     state.projectName=value
+  },
+  async GetTotalNum(state){
+    const result=await  queryTotalNumByProject(state.startTime,state.endTime)
+    console.log('@@@', result)
+    state.totalNum.knowhere=result.data.knowhere
+    state.totalNum.milvus=result.data.milvus
+    state.totalNum.towhee=result.data.towhee
+
   }
 }
 const state = {
@@ -59,6 +70,12 @@ const state = {
     legendData: [],
     seriesObj: [],
     series: []
+  },
+  totalNum:{
+    milvus:0,
+    towhee:0,
+    knowhere:0,
+    zilliz:0
   }
 }
 

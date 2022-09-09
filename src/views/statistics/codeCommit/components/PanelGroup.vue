@@ -61,16 +61,17 @@ import CountTo from 'vue-count-to'
 export default {
   data(){
     return{
-      totalNum:{
-        towhee:100,
-        milvus:100,
-        knowhere:99,
-        zilliz:0
-      }
+
     }
   },
   components: {
     CountTo
+
+  },
+  computed:{
+    totalNum(){
+      return this.$store.state.statistics.totalNum
+    }
   },
   methods: {
     handleSetLineChartData(type) {
@@ -78,6 +79,9 @@ export default {
       this.$store.commit("statistics/SetProjectName",type)
       this.$store.dispatch("statistics/getStatistics")
     }
+  },
+  mounted() {
+    this.$store.commit("statistics/GetTotalNum")
   }
 }
 </script>
