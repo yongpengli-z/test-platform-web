@@ -75,7 +75,8 @@ export const constantRoutes = [
         component: () => import('@/views/tree/index'),
         meta: {title: 'Tree', icon: 'tree'}
       }
-    ]
+    ],
+    hidden: true
   },
 
   {
@@ -88,7 +89,8 @@ export const constantRoutes = [
         component: () => import('@/views/form/index'),
         meta: {title: 'Form', icon: 'form'}
       }
-    ]
+    ],
+    hidden: true
   },
 
   {
@@ -147,7 +149,8 @@ export const constantRoutes = [
         name: 'Menu2',
         meta: {title: 'menu2'}
       }
-    ]
+    ],
+    hidden: true
   },
 
   {
@@ -158,7 +161,8 @@ export const constantRoutes = [
         path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
         meta: {title: 'External Link', icon: 'link'}
       }
-    ]
+    ],
+    hidden: true
   },
 
   {
